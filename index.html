@@ -251,6 +251,13 @@
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
+      .streak-fallback {
+        margin-top: 12px;
+        color: var(--muted);
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
       footer {
         text-align: center;
         color: var(--muted);
@@ -283,10 +290,7 @@
                 I’m Harshit Malik
               </span>
             </h1>
-            <p class="lead">
-              Hey There! I am Harshit and I am a passionate software engineer with special
-              interest in systems design.
-            </p>
+            <p class="lead" data-intro></p>
             <div class="meta">
               <div class="meta-card">🌍 Based in India</div>
               <div class="meta-card">
@@ -321,10 +325,7 @@
 
         <section class="section card" id="about">
           <h2>About Me</h2>
-          <p>
-            Systems Engineer and Hobbyist. Hey There! I am Harshit and I am a passionate
-            software engineer with special interest in systems design.
-          </p>
+          <p data-intro></p>
           <ul class="highlights">
             <li>🌍 I’m based in India</li>
             <li>✉️ You can contact me at harshitfr25@gmail.com</li>
@@ -352,6 +353,9 @@
               loading="lazy"
             />
           </div>
+          <p class="streak-fallback" id="streak-fallback" hidden>
+            GitHub streak stats are temporarily unavailable.
+          </p>
         </section>
 
         <footer>
@@ -361,6 +365,13 @@
     </div>
 
     <script>
+      const introText =
+        "Hey There! I am Harshit and I am a passionate software engineer with special interest in systems design.";
+
+      document.querySelectorAll("[data-intro]").forEach((element) => {
+        element.textContent = introText;
+      });
+
       const skills = [
         {
           name: "C",
@@ -692,6 +703,13 @@
       document.addEventListener("mousemove", (event) => {
         root.style.setProperty("--cursor-x", `${event.clientX}px`);
         root.style.setProperty("--cursor-y", `${event.clientY}px`);
+      });
+
+      const streakImage = document.querySelector(".streak img");
+      const streakFallback = document.getElementById("streak-fallback");
+      streakImage.addEventListener("error", () => {
+        streakImage.style.display = "none";
+        streakFallback.hidden = false;
       });
 
       document.getElementById("year").textContent = new Date().getFullYear();
