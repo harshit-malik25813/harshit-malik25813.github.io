@@ -720,7 +720,7 @@
         /^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$/;
       const safeGithubUser = githubUserPattern.test(githubUser) ? githubUser : "";
       if (safeGithubUser) {
-        const streakUrl = `https://streak-stats.demolab.com?user=${safeGithubUser}&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D`;
+        const streakUrl = `https://github-readme-streak-stats.herokuapp.com?user=${safeGithubUser}&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D`;
         streakImage.src = streakUrl;
       } else {
         streakImage.style.display = "none";
