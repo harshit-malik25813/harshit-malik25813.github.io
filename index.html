@@ -717,9 +717,13 @@
       const streakImage = document.getElementById("streak-image");
       const streakFallback = document.getElementById("streak-fallback");
       const safeGithubUser = githubUser.replace(/[^a-zA-Z0-9-]/g, "");
-      const resolvedGithubUser = safeGithubUser || "harshit-malik25813";
-      const streakUrl = `https://streak-stats.demolab.com?user=${resolvedGithubUser}&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D`;
-      streakImage.src = streakUrl;
+      if (safeGithubUser) {
+        const streakUrl = `https://streak-stats.demolab.com?user=${safeGithubUser}&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D`;
+        streakImage.src = streakUrl;
+      } else {
+        streakImage.style.display = "none";
+        streakFallback.hidden = false;
+      }
       streakImage.addEventListener("error", () => {
         streakImage.style.display = "none";
         streakFallback.hidden = false;
