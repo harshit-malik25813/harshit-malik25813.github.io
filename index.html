@@ -348,12 +348,12 @@
           <p>Consistency matters. Here’s my current GitHub contribution streak.</p>
           <div class="streak">
             <img
-              src="https://streak-stats.demolab.com?user=harshit-malik25813&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D"
+              id="streak-image"
               alt="GitHub contribution streak stats"
               loading="lazy"
             />
           </div>
-          <p class="streak-fallback" id="streak-fallback" hidden>
+          <p class="streak-fallback" id="streak-fallback" aria-live="polite" hidden>
             GitHub streak stats are temporarily unavailable.
           </p>
         </section>
@@ -365,6 +365,7 @@
     </div>
 
     <script>
+      const githubUser = "harshit-malik25813";
       const introText =
         "Hey There! I am Harshit and I am a passionate software engineer with special interest in systems design.";
 
@@ -705,8 +706,10 @@
         root.style.setProperty("--cursor-y", `${event.clientY}px`);
       });
 
-      const streakImage = document.querySelector(".streak img");
+      const streakImage = document.getElementById("streak-image");
       const streakFallback = document.getElementById("streak-fallback");
+      const streakUrl = `https://streak-stats.demolab.com?user=${githubUser}&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D`;
+      streakImage.src = streakUrl;
       streakImage.addEventListener("error", () => {
         streakImage.style.display = "none";
         streakFallback.hidden = false;
