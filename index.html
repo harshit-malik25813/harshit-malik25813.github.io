@@ -297,7 +297,9 @@
                 ✉️
                 <a href="mailto:harshitfr25@gmail.com">harshitfr25@gmail.com</a>
               </div>
-              <div class="meta-card">🧠 Currently learning Chip Architecture</div>
+              <div class="meta-card">
+                🧠 Currently learning chip architecture (hardware design)
+              </div>
               <div class="meta-card">👥 Open to challenging collaborations</div>
             </div>
             <div class="cta">
@@ -329,7 +331,7 @@
           <ul class="highlights">
             <li>🌍 I’m based in India</li>
             <li>✉️ You can contact me at harshitfr25@gmail.com</li>
-            <li>🧠 I’m currently learning Chip Architecture</li>
+            <li>🧠 I’m currently learning chip architecture (hardware design)</li>
             <li>👥 I’m looking to collaborate on anything that is challenging and poses real risks</li>
           </ul>
         </section>
@@ -367,7 +369,7 @@
     <script>
       const githubUser = "harshit-malik25813";
       const introText =
-        "Hey There! I am Harshit and I am a passionate software engineer with special interest in systems design.";
+        "Hey there! I am Harshit and I am a passionate software engineer with special interest in systems design.";
 
       document.querySelectorAll("[data-intro]").forEach((element) => {
         element.textContent = introText;
@@ -536,7 +538,7 @@
         },
         {
           name: "Flask",
-          link: "https://flask.palletsprojects.com/en/3.0.x/",
+          link: "https://flask.palletsprojects.com/",
           icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/flask-colored-dark.svg",
         },
         {
@@ -683,7 +685,13 @@
         card.href = skill.link;
         card.target = "_blank";
         card.rel = "noreferrer";
-        card.innerHTML = `<img src="${skill.icon}" alt="${skill.name}" loading="lazy" /><span>${skill.name}</span>`;
+        const icon = document.createElement("img");
+        icon.src = skill.icon;
+        icon.alt = skill.name;
+        icon.loading = "lazy";
+        const label = document.createElement("span");
+        label.textContent = skill.name;
+        card.append(icon, label);
         grid.appendChild(card);
       });
 
@@ -708,7 +716,9 @@
 
       const streakImage = document.getElementById("streak-image");
       const streakFallback = document.getElementById("streak-fallback");
-      const streakUrl = `https://streak-stats.demolab.com?user=${githubUser}&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D`;
+      const safeGithubUser = githubUser.replace(/[^a-zA-Z0-9-]/g, "");
+      const resolvedGithubUser = safeGithubUser || "harshit-malik25813";
+      const streakUrl = `https://streak-stats.demolab.com?user=${resolvedGithubUser}&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D`;
       streakImage.src = streakUrl;
       streakImage.addEventListener("error", () => {
         streakImage.style.display = "none";
