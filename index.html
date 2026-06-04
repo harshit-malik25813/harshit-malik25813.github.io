@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Harshit Malik | Introduction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #05070f;
+        --bg-soft: #0c1020;
+        --surface: rgba(255, 255, 255, 0.06);
+        --surface-strong: rgba(255, 255, 255, 0.12);
+        --text: #f3f4f8;
+        --muted: #a7b0c0;
+        --accent: #7c9cff;
+        --accent-strong: #9bb2ff;
+        --cursor-x: 50vw;
+        --cursor-y: 50vh;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: radial-gradient(
+            1200px circle at 10% 10%,
+            rgba(124, 156, 255, 0.16),
+            transparent 55%
+          ),
+          radial-gradient(
+            800px circle at 90% 20%,
+            rgba(146, 213, 255, 0.12),
+            transparent 55%
+          ),
+          var(--bg);
+        color: var(--text);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+          500px circle at var(--cursor-x) var(--cursor-y),
+          rgba(124, 156, 255, 0.12),
+          transparent 65%
+        );
+        transition: background 0.2s ease-out;
+        z-index: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        position: relative;
+        z-index: 1;
+        padding: 48px 24px 64px;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 48px;
+      }
+
+      .section {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 32px;
+        align-items: center;
+        background: linear-gradient(135deg, rgba(124, 156, 255, 0.15), transparent 60%),
+          var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 24px;
+        padding: 36px;
+        backdrop-filter: blur(14px);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.2rem, 2.5vw + 1.6rem, 3.4rem);
+        margin: 0 0 12px;
+        line-height: 1.1;
+      }
+
+      .hero .eyebrow {
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-bottom: 12px;
+      }
+
+      .hero .lead {
+        font-size: 1.05rem;
+        color: var(--muted);
+        margin-bottom: 18px;
+      }
+
+      .hero .wave {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .hero .wave img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .hero .meta {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        margin-top: 12px;
+      }
+
+      .meta-card {
+        background: var(--surface);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 14px 16px;
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      .cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .cta a {
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: var(--surface-strong);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: transform 0.2s ease, background 0.2s ease;
+      }
+
+      .cta a:hover {
+        transform: translateY(-2px);
+        background: rgba(124, 156, 255, 0.25);
+      }
+
+      .card {
+        background: var(--surface);
+        border-radius: 20px;
+        padding: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .card h2 {
+        margin: 0 0 12px;
+        font-size: 1.6rem;
+      }
+
+      .card p {
+        color: var(--muted);
+        margin: 0 0 16px;
+      }
+
+      .highlights {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        color: var(--muted);
+      }
+
+      .highlights li {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 12px;
+        padding: 10px 14px;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+      }
+
+      .skill {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: transform 0.2s ease, border 0.2s ease, background 0.2s ease;
+      }
+
+      .skill img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .skill span {
+        font-size: 0.92rem;
+        color: var(--text);
+      }
+
+      .skill:hover {
+        transform: translateY(-3px);
+        border-color: rgba(124, 156, 255, 0.4);
+        background: rgba(124, 156, 255, 0.15);
+      }
+
+      .streak {
+        display: flex;
+        justify-content: center;
+      }
+
+      .streak img {
+        max-width: 100%;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .streak-fallback {
+        margin-top: 12px;
+        color: var(--muted);
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        body::before,
+        .section,
+        .cta a,
+        .skill {
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="container">
+        <section class="section hero">
+          <div>
+            <div class="eyebrow">Systems Engineer &amp; Hobbyist</div>
+            <h1>
+              <span class="wave">
+                Hi
+                <img
+                  src="https://user-images.githubusercontent.com/18350557/176309783-0785949b-9127-417c-8b55-ab5a4333674e.gif"
+                  alt="Wave"
+                />
+                I’m Harshit Malik
+              </span>
+            </h1>
+            <p class="lead" data-intro></p>
+            <div class="meta">
+              <div class="meta-card">🌍 Based in India</div>
+              <div class="meta-card">
+                ✉️
+                <a href="mailto:harshitfr25@gmail.com">harshitfr25@gmail.com</a>
+              </div>
+              <div class="meta-card">
+                🧠 Currently learning chip architecture (hardware design)
+              </div>
+              <div class="meta-card">👥 Open to challenging collaborations</div>
+            </div>
+            <div class="cta">
+              <a href="mailto:harshitfr25@gmail.com">Contact</a>
+              <a href="https://www.github.com/harshit-malik25813" target="_blank"
+                >GitHub</a
+              >
+              <a href="#skills">View Skills</a>
+            </div>
+          </div>
+          <div class="card">
+            <h2>Introduction</h2>
+            <p>
+              This page is a curated snapshot of the languages, platforms, and tools I enjoy
+              working with. It’s built from the highlights in my profile README, presented
+              with a focus on clarity and momentum.
+            </p>
+            <ul class="highlights">
+              <li>Systems-focused engineering mindset</li>
+              <li>Comfortable across full-stack and cloud platforms</li>
+              <li>Driven by meaningful problems with real-world impact</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="section card" id="about">
+          <h2>About Me</h2>
+          <p data-intro></p>
+          <ul class="highlights">
+            <li>🌍 I’m based in India</li>
+            <li>✉️ You can contact me at harshitfr25@gmail.com</li>
+            <li>🧠 I’m currently learning chip architecture (hardware design)</li>
+            <li>👥 I’m looking to collaborate on anything that is challenging and poses real risks</li>
+          </ul>
+        </section>
+
+        <section class="section card" id="skills">
+          <h2>Languages &amp; Platforms</h2>
+          <p>
+            A visual overview of the languages, frameworks, platforms, and tools highlighted
+            in my profile.
+          </p>
+          <div class="skills-grid" aria-live="polite"></div>
+        </section>
+
+        <section class="section card" id="streak">
+          <h2>GitHub Streak</h2>
+          <p>Consistency matters. Here’s my current GitHub contribution streak.</p>
+          <div class="streak">
+            <img
+              id="streak-image"
+              alt="GitHub contribution streak stats"
+              loading="lazy"
+            />
+          </div>
+          <p class="streak-fallback" id="streak-fallback" aria-live="polite" hidden>
+            GitHub streak stats are temporarily unavailable.
+          </p>
+        </section>
+
+        <footer>
+          <span id="year"></span> © Harshit Malik. Built for GitHub Pages.
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      const githubUser = "harshit-malik25813";
+      const introText =
+        "Hey there! I am Harshit and I am a passionate software engineer with a special interest in systems design.";
+
+      document.querySelectorAll("[data-intro]").forEach((element) => {
+        element.textContent = introText;
+      });
+
+      const skills = [
+        {
+          name: "C",
+          link: "https://docs.microsoft.com/en-us/cpp/?view=msvc-170",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/c-colored.svg",
+        },
+        {
+          name: "C++",
+          link: "https://docs.microsoft.com/en-us/cpp/?view=msvc-170",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/cplusplus-colored.svg",
+        },
+        {
+          name: "C#",
+          link: "https://docs.microsoft.com/en-us/dotnet/csharp/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/csharp-colored.svg",
+        },
+        {
+          name: "Dart",
+          link: "https://dart.dev/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/dart-colored.svg",
+        },
+        {
+          name: "Git",
+          link: "https://git-scm.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/git-colored.svg",
+        },
+        {
+          name: "Go",
+          link: "https://go.dev/doc/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/go-colored.svg",
+        },
+        {
+          name: "Java",
+          link: "https://www.oracle.com/java/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/java-colored.svg",
+        },
+        {
+          name: "JavaScript",
+          link: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/javascript-colored.svg",
+        },
+        {
+          name: "TypeScript",
+          link: "https://www.typescriptlang.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/typescript-colored.svg",
+        },
+        {
+          name: "Swift",
+          link: "https://developer.apple.com/swift/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/swift-colored.svg",
+        },
+        {
+          name: "Python",
+          link: "https://www.python.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/python-colored.svg",
+        },
+        {
+          name: "Kotlin",
+          link: "https://kotlinlang.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/kotlin-colored.svg",
+        },
+        {
+          name: "Lua",
+          link: "https://lua.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/lua-colored.svg",
+        },
+        {
+          name: "GNU Bash",
+          link: "https://www.gnu.org/software/bash/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/gnubash-colored.svg",
+        },
+        {
+          name: "VS Code",
+          link: "https://code.visualstudio.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/visualstudiocode-colored.svg",
+        },
+        {
+          name: "Vim",
+          link: "https://www.vim.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/vim-colored.svg",
+        },
+        {
+          name: "Sublime Text",
+          link: "https://www.sublimetext.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/sublimetext-colored.svg",
+        },
+        {
+          name: "Xcode",
+          link: "https://developer.apple.com/xcode/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/xcode-colored.svg",
+        },
+        {
+          name: "HTML5",
+          link: "https://developer.mozilla.org/en-US/docs/Glossary/HTML5",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/html5-colored.svg",
+        },
+        {
+          name: "React",
+          link: "https://reactjs.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/react-colored.svg",
+        },
+        {
+          name: "Vue",
+          link: "https://vuejs.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/vuejs-colored.svg",
+        },
+        {
+          name: "Angular",
+          link: "https://angular.io/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/angularjs-colored.svg",
+        },
+        {
+          name: "CSS3",
+          link: "https://www.w3.org/TR/CSS/#css",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/css3-colored.svg",
+        },
+        {
+          name: "Bootstrap",
+          link: "https://getbootstrap.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/bootstrap-colored.svg",
+        },
+        {
+          name: "TailwindCSS",
+          link: "https://tailwindcss.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tailwindcss-colored.svg",
+        },
+        {
+          name: "NodeJS",
+          link: "https://nodejs.org/en/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/nodejs-colored.svg",
+        },
+        {
+          name: "Fast API",
+          link: "https://fastapi.tiangolo.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/fastapi-colored.svg",
+        },
+        {
+          name: "MongoDB",
+          link: "https://www.mongodb.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mongodb-colored.svg",
+        },
+        {
+          name: "MySQL",
+          link: "https://www.mysql.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/mysql-colored.svg",
+        },
+        {
+          name: "PostgreSQL",
+          link: "https://www.postgresql.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/postgresql-colored.svg",
+        },
+        {
+          name: "Firebase",
+          link: "https://firebase.google.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/firebase-colored.svg",
+        },
+        {
+          name: "Heroku",
+          link: "https://www.heroku.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/heroku-colored.svg",
+        },
+        {
+          name: "Flask",
+          link: "https://flask.palletsprojects.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/flask-colored-dark.svg",
+        },
+        {
+          name: "Photoshop",
+          link: "https://www.adobe.com/uk/products/photoshop.html",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/photoshop-colored-dark.svg",
+        },
+        {
+          name: "Illustrator",
+          link: "https://www.adobe.com/uk/products/illustrator.html",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/illustrator-colored-dark.svg",
+        },
+        {
+          name: "After Effects",
+          link: "https://www.adobe.com/uk/products/aftereffects.html",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/aftereffects-colored-dark.svg",
+        },
+        {
+          name: "Premiere Pro",
+          link: "https://www.adobe.com/uk/products/premiere.html",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/premierepro-colored-dark.svg",
+        },
+        {
+          name: "XD",
+          link: "https://www.adobe.com/uk/products/xd.html",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/xd-colored-dark.svg",
+        },
+        {
+          name: "Figma",
+          link: "https://www.figma.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/figma-colored.svg",
+        },
+        {
+          name: "Google Cloud",
+          link: "https://cloud.google.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/googlecloud-colored.svg",
+        },
+        {
+          name: "Microsoft Azure",
+          link: "https://portal.azure.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/azure-colored.svg",
+        },
+        {
+          name: "WordPress",
+          link: "https://wordpress.com",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/wordpress-colored.svg",
+        },
+        {
+          name: "Framer",
+          link: "https://framer.com",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/framer-colored.svg",
+        },
+        {
+          name: "Wix",
+          link: "https://wix.com",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/wix-colored.svg",
+        },
+        {
+          name: "Arduino",
+          link: "https://store.arduino.cc/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/arduino-colored.svg",
+        },
+        {
+          name: "Raspberry Pi",
+          link: "https://www.raspberrypi.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/raspberrypi-colored.svg",
+        },
+        {
+          name: "Linux",
+          link: "https://www.linux.org",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/linux-colored.svg",
+        },
+        {
+          name: "MacOS",
+          link: "https://apple.com",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/macos-colored-dark.svg",
+        },
+        {
+          name: "Fedora",
+          link: "https://fedoraproject.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/fedora-colored.svg",
+        },
+        {
+          name: "Ubuntu",
+          link: "https://ubuntu.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/ubuntu-colored.svg",
+        },
+        {
+          name: ".NET",
+          link: "https://dotnet.microsoft.com/en-us/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/dot-net-colored.svg",
+        },
+        {
+          name: "Django",
+          link: "https://www.djangoproject.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/django-colored-dark.svg",
+        },
+        {
+          name: "Flutter",
+          link: "https://flutter.dev/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/flutter-colored.svg",
+        },
+        {
+          name: "AWS",
+          link: "https://aws.amazon.com",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/aws-colored-dark.svg",
+        },
+        {
+          name: "Blender",
+          link: "https://www.blender.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/blender-colored.svg",
+        },
+        {
+          name: "Digital Ocean",
+          link: "https://www.digitalocean.com",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/digitalocean-colored.svg",
+        },
+        {
+          name: "Docker",
+          link: "https://www.docker.com/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/docker-colored.svg",
+        },
+        {
+          name: "Kubernetes",
+          link: "https://kubernetes.io/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/kubernetes-colored.svg",
+        },
+        {
+          name: "PyTorch",
+          link: "https://pytorch.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/pytorch-colored.svg",
+        },
+        {
+          name: "TensorFlow",
+          link: "https://www.tensorflow.org/",
+          icon: "https://raw.githubusercontent.com/danielcranney/readme-generator/main/public/icons/skills/tensorflow-colored.svg",
+        },
+      ];
+
+      const grid = document.querySelector(".skills-grid");
+      skills.forEach((skill) => {
+        const card = document.createElement("a");
+        card.className = "skill";
+        card.href = skill.link;
+        card.target = "_blank";
+        card.rel = "noreferrer";
+        const icon = document.createElement("img");
+        icon.src = skill.icon;
+        icon.alt = skill.name;
+        icon.loading = "lazy";
+        const label = document.createElement("span");
+        label.textContent = skill.name;
+        card.append(icon, label);
+        grid.appendChild(card);
+      });
+
+      const sections = document.querySelectorAll(".section");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      sections.forEach((section) => observer.observe(section));
+
+      const root = document.documentElement;
+      document.addEventListener("mousemove", (event) => {
+        root.style.setProperty("--cursor-x", `${event.clientX}px`);
+        root.style.setProperty("--cursor-y", `${event.clientY}px`);
+      });
+
+      const streakImage = document.getElementById("streak-image");
+      const streakFallback = document.getElementById("streak-fallback");
+      const githubUserPattern =
+        /^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?=[a-zA-Z0-9])){0,38}$/;
+      const safeGithubUser = githubUserPattern.test(githubUser) ? githubUser : "";
+      if (safeGithubUser) {
+        const streakUrl = `https://streak-stats.demolab.com?user=${safeGithubUser}&theme=transparent&hide_border=true&date_format=j%20M%5B%20Y%5D`;
+        streakImage.src = streakUrl;
+      } else {
+        streakImage.style.display = "none";
+        streakFallback.hidden = false;
+      }
+      streakImage.addEventListener("error", () => {
+        streakImage.style.display = "none";
+        streakFallback.hidden = false;
+      });
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
